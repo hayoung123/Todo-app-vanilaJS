@@ -8,28 +8,60 @@
   </head>
   <body>
     <div class="container">
-      <div id="js-clock">
-        <h1></h1>
+      <div class="container-todo">
+        <div id="js-clock">
+          <h1></h1>
+        </div>
+        <form id="greeting-form">
+          <input type="text" placeholder="Write your name" />
+          <h3 id="greeting" class="hiding"></h3>
+        </form>
+        <form id="todo-form">
+          <input type="text" placeholder="오늘의 할일을 작성해주세요!" />
+        </form>
+        <div class="list-container">
+          <ul class="todo-list">
+            <h3>오늘의 할일</h3>
+          </ul>
+          <ul class="finish-list">
+            <h3>오늘 달성한 일!</h3>
+          </ul>
+        </div>
       </div>
-      <form id="greeting-form">
-        <input type="text" placeholder="Write your name" />
-        <h3 id="greeting" class="hiding"></h3>
-      </form>
-      <form id="todo-form">
-        <input type="text" placeholder="오늘의 할일을 작성해주세요!" />
-      </form>
-      <div class="list-container">
-        <ul class="todo-list">
-          <h3>오늘의 할일</h3>
-        </ul>
-        <ul class="finish-list">
-          <h3>오늘 달성한 일!</h3>
-        </ul>
+      <div class="container-calendar">
+        <table id="calendar">
+          <thead>
+            <tr class="calendar-btn">
+              <td>
+                <label id="prev">
+                  &#60;
+                </label>
+              </td>
+              <td align="center" id="current-year-month" colspan="5"></td>
+              <td>
+                <label id="next">
+                  &#62;
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th>SUN</th>
+              <th>MON</th>
+              <th>TUE</th>
+              <th>WED</th>
+              <th>TUR</th>
+              <th>FRI</th>
+              <th>SAT</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body" class="calendar-body"></tbody>
+        </table>
       </div>
     </div>
     <script src="src/js/clock.js"></script>
     <script src="src/js/greeting.js"></script>
     <script src="src/js/todo.js"></script>
     <script src="src/js/background.js"></script>
+    <script src="src/js/calendar.js"></script>
   </body>
 </html>
