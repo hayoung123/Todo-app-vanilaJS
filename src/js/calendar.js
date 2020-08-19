@@ -1,8 +1,10 @@
 const currentTitle = document.querySelector("#current-year-month");
 const calendarBody = document.querySelector("#calendar-body");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
 const today = new Date();
-const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
 const MONTH_LIST = [
   "January",
   "February",
@@ -21,8 +23,11 @@ const LEAP_YEAR = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const NO_LEAP_YEAR = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 let pageFirstDay = firstDay;
 let pageYear;
-if (today.getFullYear % 4 === 0) pageYear = LEAP_YEAR;
-else pageYear = NO_LEAP_YEAR;
+
+function checkLeafYear() {
+  if (today.getFullYear % 4 === 0) pageYear = LEAP_YEAR;
+  else pageYear = NO_LEAP_YEAR;
+}
 
 function showYearMonth(pageFirstDay) {
   currentTitle.innerText = `${
@@ -31,6 +36,7 @@ function showYearMonth(pageFirstDay) {
 }
 
 function showCalendar() {
+  checkLeafYear();
   let monthCnt = 100;
   let cnt = 1;
   //주생성 (최대 6주)
@@ -69,9 +75,38 @@ function removeCalendar() {
     getTr++;
   }
 }
+//prev btn
+function prev() {
+  if (pageFirstDay.getMonth() === 0) {
+    pageFirstDay = new Date(firstDay.getFullYear() - 1, 11, 1);
+    firstDay = pageFirstDay;
+    checkLeafYear();
+  } else {
+    pageFirstDay = new Date(firstDay.getFullYear(), firstDay.getMonth() - 1, 1);
+    firstDay = pageFirstDay;
+  }
+  showYearMonth(pageFirstDay);
+  removeCalendar();
+  showCalendar();
+}
+function next() {
+  if (pageFirstDay.getMonth() === 11) {
+    pageFirstDay = new Date(firstDay.getFullYear() + 1, 0, 1);
+    firstDay = pageFirstDay;
+    checkLeafYear();
+  } else {
+    pageFirstDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 1);
+    firstDay = pageFirstDay;
+  }
+  showYearMonth(pageFirstDay);
+  removeCalendar();
+  showCalendar();
+}
 
 function init() {
   showCalendar();
   showYearMonth(pageFirstDay);
+  prevBtn.addEventListener("click", prev);
+  nextBtn.addEventListener("click", next);
 }
 init();
