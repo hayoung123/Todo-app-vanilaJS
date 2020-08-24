@@ -12,6 +12,7 @@ function setBackground(imgNumber) {
   image.src = IMG_LINK[imgNumber];
   image.classList.add("backImg");
   body.appendChild(image);
+  // body.style.backgroundImage = `url(${IMG_LINK[imgNumber]})`;
 }
 
 function getRandom() {
